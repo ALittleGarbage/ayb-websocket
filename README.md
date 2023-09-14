@@ -22,38 +22,68 @@ ayb-websocket基于netty实现了websocket框架，集成了spring-boot，开箱
    @WebSocket(port = 9999, path = "/ws")
    public class MyMapping extends AbstractWebSocketMapping<String, String> {
 
-      @Override
-      protected String onMessage(ChannelHandlerContext ctx, String request) {
-          // 发送事件
-          ctx.pipeline().fireUserEventTriggered("接收消息:" + request);
-          return "Hello, WebSocket";
-      }
-  
-      @Override
-      protected byte[] onBinary(ChannelHandlerContext ctx, byte[] content) {
-          return null;
-      }
-  
-      @Override
-      protected void onClose(ChannelHandlerContext ctx) {
-          System.out.println("客户端" + ctx.channel().remoteAddress() + "下线");
-      }
-  
-      @Override
-      protected void onOpen(ChannelHandlerContext ctx) {
-          System.out.println("客户端" + ctx.channel().remoteAddress() + "上线");
-      }
-  
-      @Override
-      protected void onError(ChannelHandlerContext ctx, Throwable cause) {
-          System.out.println("出现错误,原因:" + cause.getMessage());
-      }
-  
-      @Override
-      protected void onEvent(ChannelHandlerContext ctx, Object evt) {
-          if (evt instanceof String) {
-              System.out.println("事件:" + evt);
-          }
-      }
+         /**
+        * 接收消息
+        * @param ctx
+        * @param request
+        * @return
+        */
+       @Override
+       protected String onMessage(ChannelHandlerContext ctx, String request) {
+           // 发送事件
+           ctx.pipeline().fireUserEventTriggered("接收消息:" + request);
+           return "Hello, WebSocket";
+       }
+   
+       /**
+        * 接收二进制消息
+        * @param ctx
+        * @param content
+        * @return
+        */
+       @Override
+       protected byte[] onBinary(ChannelHandlerContext ctx, byte[] content) {
+           return null;
+       }
+   
+       /**
+        * 客户端下线
+        * @param ctx
+        */
+       @Override
+       protected void onClose(ChannelHandlerContext ctx) {
+           System.out.println("客户端" + ctx.channel().remoteAddress() + "下线");
+       }
+   
+       /**
+        * 客户端上线
+        * @param ctx
+        */
+       @Override
+       protected void onOpen(ChannelHandlerContext ctx) {
+           System.out.println("客户端" + ctx.channel().remoteAddress() + "上线");
+       }
+   
+       /**
+        * 错误处理
+        * @param ctx
+        * @param cause
+        */
+       @Override
+       protected void onError(ChannelHandlerContext ctx, Throwable cause) {
+           System.out.println("出现错误,原因:" + cause.getMessage());
+       }
+   
+       /**
+        * 监听事件
+        * @param ctx
+        * @param evt
+        */
+       @Override
+       protected void onEvent(ChannelHandlerContext ctx, Object evt) {
+           if (evt instanceof String) {
+               System.out.println("事件:" + evt);
+           }
+       }
    }
    ```
