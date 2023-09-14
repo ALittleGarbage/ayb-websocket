@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.ayb.websocket.spring.boot.starter.config.WebSocketAutoConfiguration
