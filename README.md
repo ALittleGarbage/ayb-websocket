@@ -22,7 +22,7 @@ ayb-websocket基于netty实现了websocket框架，集成了spring-boot，开箱
    @WebSocket(port = 9999, path = "/ws")
    public class MyMapping extends AbstractWebSocketMapping<String, String> {
 
-         /**
+       /**
         * 接收消息
         * @param ctx
         * @param request
